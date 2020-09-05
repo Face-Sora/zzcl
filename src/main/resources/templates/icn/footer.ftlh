@@ -97,7 +97,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-primary" onclick="alert('你的留言我们已经收到，感谢您的宝贵建议！')">提交</button>
             </div>
         </div>
     </div>

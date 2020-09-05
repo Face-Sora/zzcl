@@ -45,6 +45,9 @@
                             <a class="${(code == 4)?string('active','')}" href="/need/toPublish?pageNum=1&pageSize=3">发布需求</a>
                         </li>
                         <li>
+                            <a class="${(code == 6)?string('active','')}" href="/toShow">案例展示</a>
+                        </li>
+                        <li>
                             <a class="${(code == 5)?string('active','')}" href="/towe">联系我们</a>
                         </li>
                     </ul>

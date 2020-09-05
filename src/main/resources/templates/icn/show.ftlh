@@ -2,13 +2,13 @@
     <div id="hwslider" class="hwslider">
         <ul>
             <li>
-                <a href="#"><img src="images/b1.jpg" alt=""></a>
+                <a href="#"><img src="/images/b1-1.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="images/b2.jpg" alt=""></a>
+                <a href="#"><img src="/images/b2-1.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="images/b3.jpg" alt=""></a>
+                <a href="#"><img src="/images/b3-1.jpg" alt=""></a>
             </li>
         </ul>
     </div>

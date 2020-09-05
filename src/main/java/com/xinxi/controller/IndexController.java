@@ -89,6 +89,12 @@ public class IndexController extends BaseController{
         return "about";
     }
 
+    @GetMapping("/toShow")
+    public String show(Model model){
+        model.addAttribute("code", 6);
+        return "show";
+    }
+
     @RequestMapping("/towe")
     public String toWe(Model model){
         model.addAttribute("code", 5);

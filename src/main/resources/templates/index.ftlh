@@ -21,7 +21,7 @@
 	<![endif]-->
 </head>
 
-<body>
+<body style="overflow-x:hidden;">
 	<#include "./icn/header.ftlh">
 <!--幻灯片-->
 	<#include "./icn/show.ftlh">
@@ -223,71 +223,229 @@
 	</div>
 </section>
 <!--最新动态-->
-<section class="new clearfix">
-	<div class="container">
-		<h2>最新合作</h2>
-		<div class="col-md-6 new-l">
-			<h3><img src="images/news_01.png"><em>合作商</em><a class="mo" href="new.html">more+</a></h3>
-			<ul>
+	<section class="new clearfix">
+		<div class="container">
+			<h2>最新合作</h2>
+			<div class="col-md-6 new-r">
+				<h3><img src="images/news_01.png"><em>合作商</em></h3>
+				<div class="myscroll">
+					<ul>
+						<li>
+							<a href="">淄博深科科技有限公司</a><time class="right">2020-06</time>
+						</li>
+						<li>
+							<a href="">淄博鑫展翔机电有限公司</a><time class="right">2020-06</time>
+						</li>
+						<li>
+							<a href="">山东三石智能科技有限公司</a><time class="right">2020-06</time>
+						</li>
+						<li>
+							<a href="">淄博众成机器人科技有限公司</a><time class="right">2020-06</time>
+						</li>
+						<li>
+							<a href="">山东金聚丰软件有限公司</a><time class="right">2020-06</time>
+						</li>
+					</ul>
+				</div>
 
-				<li>
-					<h4><a href="">山东XX科技公司</a></h4>
-					<p>加入项目对接平台并入驻平台</p>
-					<time class="right">2020-08-08</time>
-				</li>
-			</ul>
-		</div>
-		<div class="col-md-6 new-r">
-			<h3><img src="images/news_02.png"><em>最新加入企业</em><a class="mo" href="">more+</a></h3>
-			<div class="myscroll">
-				<ul>
-					<li>
-						<a href="">华正检测分析有限公司</a><time class="right">2020-07-17</time></li>
-					<li>
-						<a href="">仙农塑业有限公司</a><time class="right">2020-06-18</time></li>
-					<li>
-						<a href="">潍坊华冠塑业有限公司</a><time class="right">2019-08-19</time></li>
-					<li>
-						<a href="">意利塑业有限公司</a><time class="right">2018-07-17</time></li>
-					<li>
-						<a href="">济南瀚华教育有限公司</a><time class="right">2017-03-18</time></li>
-					<li>
-						<a href="">康师傅餐饮集团</a><time class="right">2016-06-06</time></li>
-
-				</ul>
 			</div>
+			<div class="col-md-6 new-r">
+				<h3><img src="images/news_02.png"><em>最新加入企业</em></h3>
+				<div class="myscroll">
+					<ul>
+						<li>
+							<a href="">华正检测分析有限公司</a><time class="right">2020-07-17</time></li>
+						<li>
+							<a href="">仙农塑业有限公司</a><time class="right">2020-06-18</time></li>
+						<li>
+							<a href="">潍坊华冠塑业有限公司</a><time class="right">2019-08-19</time></li>
+						<li>
+							<a href="">意利塑业有限公司</a><time class="right">2018-07-17</time></li>
+						<li>
+							<a href="">济南瀚华教育有限公司</a><time class="right">2017-03-18</time></li>
+						<li>
+							<a href="">康师傅餐饮集团</a><time class="right">2016-06-06</time></li>
 
+					</ul>
+				</div>
+
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 <!--页脚-->
 	<#include "./icn/footer.ftlh">
 
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.hwslider.min.js"></script>
 <script src="/js/main.js"></script>
-<script>
-	/*banner*/
-	$(function() {
-		$("#hwslider").hwSlider({
-			height: 160,
-			autoPlay: true,
-			arrShow: true,
-			dotShow: true,
-			touch: true
+	<script>
+		/*banner*/
+		$(function() {
+			$("#hwslider").hwSlider({
+				height: 180,
+				autoPlay: true,
+				arrShow: true,
+				dotShow: true,
+				touch: true
+			});
 		});
-	});
-	// //  滚动
-	// $(function() {
-	// 	$('.myscroll').myScroll({
-	// 		speed: 80, //数值越大，速度越慢
-	// 		rowHeight: 42 //li的高度
-	// 	});
-	// });
-	function toZone() {
-		window.open("/user/tozone","_blank")
-	}
-</script>
+		//  滚动
+		$(function() {
+			$('.myscroll').myScroll({
+				speed: 80, //数值越大，速度越慢
+				rowHeight: 42 //li的高度
+			});
+		});
+	</script>
+	<script>
+		$(function () {
+
+			$("#register").click(function () {
+				var phone = $("#rephone").val();
+				var email = $("#email").val();
+				var password = $("#password").val();
+				var nickName = $("#nickName").val();
+				var tendency = $("input[type='radio']:checked").val();
+
+				if (tendency == undefined){
+					$("#ten1").css("border","2px dotted red");
+					$("#ten2").css("border","2px dotted red");
+					return;
+				}
+				if (checkPwd() && checkNotEmpty(["rephone","email","password","password2","nickName"])){
+					$.ajax({
+						type:"post",
+						url:"/user/register",
+						data:{
+							phone : phone,
+							email : email,
+							pwd : password,
+							tendency : tendency,
+							nickName : nickName
+						},
+						success:function (result) {
+							if (result == "success"){
+								$("#mymodal-data").modal("hide");
+								$("#phone").val(phone);
+								$("#mymodal").modal("show");
+							}else {
+								alert(result);
+							}
+						}
+					})
+
+				}
+			})
+
+			$("#login").click(function () {
+				var phone = $("#phone").val();
+				console.log(phone);
+				var pwd = $("#pwd").val();
+				$.ajax({
+					type:"post",
+					url:"/login",
+					data: {
+						phone:phone,
+						pwd:pwd
+					},
+					success:function (result) {
+						if (result == "success"){
+							$("#mymodal").modal("hide");
+						}else{
+							alert(result);
+						}
+					}
+				})
+			})
+			$("#publish").click(function () {
+				$.ajax({
+					type:"get",
+					url:"/xinxi/needType/showAll",
+					success:function (result) {
+						if (result.success){
+							var options = "";
+							$.each(result.types,function (index,value) {
+								options += "<option value=" + "'" + value.id + "'" + ">" + value.name + "</option>"
+							})
+							$(options).appendTo($("#type"));
+							$("#needmodal-data").modal("show");
+						}else{
+							$("#mymodal").modal("show");
+						}
+					}
+				})
+			})
+
+			$("#type").on("change",function () {
+				$("#wran").text("");
+			})
+
+			$("input").on("focus",function () {
+				$(this).css("border","1px solid #999");
+			})
+			$("textarea").on("focus",function () {
+				$(this).css("border","1px solid #999");
+			})
+
+			$("#push").click(function () {
+				var type = $("#type").val();
+				var title = $("#title").val();
+				var price = $("#price").val();
+				var time = $("#time").val();
+				var des = $("#description").val();
+				if (type == null || type == "请选择"){
+					$("#wran").text("请选择需求类别!")
+					return;
+				}
+
+				if (!checkNotEmpty(["title","price","time","description"])){
+					return;
+				}
+
+				$.ajax({
+					type:"post",
+					url:"/need/saveNeed",
+					data:{
+						classify:type,
+						price:price,
+						title:title,
+						deadLine:time,
+						description:des
+					},
+					success:function (result) {
+						if(result.success){
+							location.href = "/need/findByUserId?userId=" + result.userId;
+						}else{
+							alert(result.error + 1)
+						}
+					}
+				})
+			})
+
+		})
+
+		function checkNotEmpty(ids) {
+			$.each(ids,function (index,item) {
+				var value = $("#"+item).val();
+				if (value == ""){
+					$("#"+item).css("border","2px solid red");
+					return false;
+				}
+			})
+			return true;
+		}
+
+		function checkPwd() {
+			if ($("#password").val() == $("#password2").val()){
+				return true;
+			}
+			$("#password").css("border","2px solid red");
+			$("#password2").css("border","2px solid red");
+			return false;
+		}
+
+
+	</script>
 </body>
 
 </html>

@@ -25,7 +25,7 @@
 		<#include "./icn/header.ftlh">
 		<!--大图-->
 		<section class="ban">
-			<img src="/images/b3.jpg">
+			<img src="images/b1-1.jpg">
 		</section>
 		<!--内容-->
 		<section>
@@ -38,14 +38,24 @@
 						</div>
 						<div class="v-line"></div>
 					</div>
-					<div class="col-md-4"><img src="images/about.jpg" /></div>
+					<div class="col-md-4"><img src="images/about1.jpg" /></div>
 					<div class="col-md-8">
 						<p class="ab-txt-right">
 							众智创联云科技(山东)有限公司
 							<span>Zhongzhi Chuanglian Cloud Technology (Shandong) Limited Company</span>
 						</p>
 						<p class="ab-wen">
-							企业简介，
+							众智创联云科技(山东)有限公司，成立于2020年06月，注册于淄博市张店区大学生创业园，
+							是由多家科技型企业和工业制造型企业共同成立，公司主要有：信息化（淄博深科科技有限公司）、智能化（淄博三石智能科技有限公司）、
+							机器人（淄博众成机器人科技有限公司）、软件开发（山东金巨丰软件有限公司）等组成。
+						</p>
+						<p class="ab-wen">
+							致力打造工业企业与现代自动化、信息化企业连接的桥梁——众智联互联网工业平台，
+							是公司的主营业务，跟进现代科技，改进生产解决方案，使工业企业实现自动化生产。
+						</p>
+						<p class="ab-wen">
+							我们在多项领域有着成熟的项目，多次为不同种类的工业企业提供解决方案，其中在农业方面，
+							我们为农膜生产提供了生产管理系统解决方案，并在多个农膜生产厂中大规模实施。
 						</p>
 					</div>
 				</div>
@@ -63,8 +73,8 @@
 								<div class="list-img">
 									<div class="">
 										<div class="list-img-tit">
-											<h2>农膜自动化生产</h2>
-											<p></p>
+											<h2>生产管理系统</h2>
+											<p>农业工业自动化生产</p>
 										</div>
 										<img src="images/pro_02.png">
 									</div>
@@ -74,8 +84,8 @@
 								<div class="list-img">
 									<div class="">
 										<div class="list-img-tit">
-											<h2>机械自动化加工</h2>
-											<p></p>
+											<h2>自动加工</h2>
+											<p>机械，五金零件规格生产，切割</p>
 										</div>
 										<img src="images/pro_02.png">
 									</div>
@@ -85,10 +95,10 @@
 								<div class="list-img">
 									<div class="">
 										<div class="list-img-tit">
-											<h2>陶瓷分割封装</h2>
-											<p></p>
+											<h2>瓷器生产</h2>
+											<p>陶瓷自动化生产，包装，码垛管理</p>
 										</div>
-										<img src="images/pro_02.png">
+										<img src="images/pro_05.png">
 									</div>
 								</div>
 							</li>
@@ -97,9 +107,9 @@
 									<div class="">
 										<div class="list-img-tit">
 											<h2>出入库监管</h2>
-											<p></p>
+											<p>盘点机打码标记出入库状态</p>
 										</div>
-										<img src="images/pro_02.png">
+										<img src="images/pro_06.png">
 									</div>
 								</div>
 							</li>
