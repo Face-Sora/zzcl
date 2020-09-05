@@ -41,7 +41,7 @@
 				<div class="row tab">
 					<ul>
 						<#list needTypes as needType>
-							<li>
+							<li class="${(needType.id == activeCode)?string("active","")}" >
 								<a href="/need/needList?pageNum=1&pageSize=1&classify=${needType.id}">${needType.name}</a>
 							</li>
 						</#list>

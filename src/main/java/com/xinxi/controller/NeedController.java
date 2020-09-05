@@ -75,6 +75,7 @@ public class NeedController extends BaseController {
         model.addAttribute("needs",needs);
         model.addAttribute("classify",classify);
         model.addAttribute("code", 3);
+        model.addAttribute("activeCode", classify);
         return "needList3";
     }
 

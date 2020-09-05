@@ -60,17 +60,17 @@
 <div class="slide">
     <ul>
         <li>
-            <a href="javascript:void(0);"><img src="images/yewu.png"></a>
+            <a href="javascript:void(0);"><img src="/images/yewu.png"></a>
         </li>
         <li class="ke">
-            <a href="javascript:void(0);"><img src="images/kefu.png"></a>
+            <a href="javascript:void(0);"><img src="/images/kefu.png"></a>
             <p>400 0256 757</p>
         </li>
         <li>
-            <a href="http://wpa.qq.com/msgrd?v=3&uin=2632418536&site=qq&menu=yes" target="_blank"><img src="images/qq.png"></a>
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=2632418536&site=qq&menu=yes" target="_blank"><img src="/images/qq.png"></a>
         </li>
         <li id="go_top">
-            <a href="javascript:void(0);"><img src="images/top.png"></a>
+            <a href="javascript:void(0);"><img src="/images/top.png"></a>
         </li>
     </ul>
 </div>
@@ -88,7 +88,7 @@
                         <input type="text" name="name" class="form-control" id="first-name" placeholder="姓名" required="required">
                     </div>
                     <div class="form-group form-tow">
-                        <input type="text" name="phone" class="form-control" id="phone" placeholder="手机" required="required">
+                        <input type="text" name="phone" class="form-control" id="lphone" placeholder="手机" required="required">
                     </div>
                     <div class="form-group form-three massage-contact">
                         <textarea rows="9" name="message" class="form-control xiala" id="description" placeholder="留言内容" required="required"></textarea>

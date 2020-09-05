@@ -39,7 +39,7 @@
                             <a class="${(code == 2)?string('active','')}" href="/about">关于我们</a>
                         </li>
                         <li>
-                            <a class="${(code == 3)?string('active','')}" href="/need/needList?pageNum=1&pageSize=1&classify=23">公司服务</a>
+                            <a class="${(code == 3)?string('active','')}" href="/need/needList?pageNum=1&pageSize=1&classify=23">项目寻找</a>
                         </li>
                         <li>
                             <a class="${(code == 4)?string('active','')}" href="/need/toPublish?pageNum=1&pageSize=3">发布需求</a>
