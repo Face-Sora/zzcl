@@ -125,6 +125,51 @@
 															</div>
 														</div>
 													</div>
+													<button type="button" class="btn bg-warning btn-xs" data-toggle="modal" data-target="#${need.id}mdf">编辑</button>
+													<div class="modal" id="${need.id}mdf" tabindex="-1" role="dialog"
+													     aria-labelledby="mySmallModalLabel" aria-hidden="true">
+													    <div class="modal-dialog">
+													        <div class="modal-content">
+													            <div class="modal-header">
+													                <button id="clsbtn" type="button" class="close" data-dismiss="modal">
+													                    <span aria-hidden="true">&times;</span>
+													                    <span class="sr-only">Close</span>
+													                </button>
+													                <h4 class="modal-title">编辑需求</h4>
+													            </div>
+													            <div class="modal-body">
+													                    <br />
+													                    <div class="input-group">
+													                        <span class="input-group-addon" >
+																				<span class="glyphicon glyphicon-pushpin " aria-hidden="true"></span>
+																			</span>
+													                        <input name="title" type="text" class="form-control"  placeholder="项目标题" aria-describedby="basic-addon1" value="${need.title}">
+													                    </div>
+													                    <br />
+													                    <div class="input-group">
+													                        <span class="input-group-addon" >
+																				<span class="glyphicon glyphicon-time " aria-hidden="true"></span>
+																			</span>
+													                        <input name="time" type="text" class="form-control"  placeholder="截止日期" aria-describedby="basic-addon1" value="${need.deadLine}">
+
+													                    </div>
+																		<br />
+																		<div class="input-group">
+																			<span class="input-group-addon" >
+																				<span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+																			</span>
+																			<input name="price" type="text" class="form-control"  placeholder="预算" aria-describedby="basic-addon1" value="${need.price}">
+																		</div>
+																			<br />
+													                    <div class="modal-footer">
+																			<button type="submit" name="mdfNeed" value="${need.id}" class="btn btn-success">确认修改</button>
+													                    </div>
+													            </div>
+													        </div>
+													    </div>
+													</div>
+
+													<button type="button" class="btn bg-danger btn-xs" name="rmNeed" needId="${need.id}">删除</button>
 												</td>
 											</tr>
 										</#list>
@@ -175,7 +220,77 @@
 									
 								</div>
 							</li>
-							
+							<li class="clearfix">
+								<div class="table" style="overflow-x:hidden">
+									<table class="table" border="" cellspacing="0" cellpadding="0">
+										<thead>
+										<tr>
+											我的个人资料
+										</tr>
+										</thead>
+										<tbody>
+										<tr style="background-color: #bce8f1">
+											<th class="">称呼</th>
+											<th class="">电话</th>
+											<th class="">邮箱</th>
+											<th class="">操作</th>
+										</tr>
+										<tr>
+											<td>${user.nickName}</td>
+											<td>${user.phone}</td>
+											<td>${user.email}</td>
+											<td><button type="button" class="btn bg-warning btn-xs" data-toggle="modal" data-target="#userMdf">编辑</button>
+												<div class="modal" id="userMdf" tabindex="-1" role="dialog"
+													 aria-labelledby="mySmallModalLabel" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button id="clsbtn" type="button" class="close" data-dismiss="modal">
+																	<span aria-hidden="true">&times;</span>
+																	<span class="sr-only">Close</span>
+																</button>
+																<h4 class="modal-title">编辑个人资料</h4>
+															</div>
+															<div class="modal-body">
+																<br />
+																<div class="input-group">
+													                        <span class="input-group-addon" >
+																				<span class="glyphicon glyphicon-user " aria-hidden="true"></span>
+																			</span>
+																	<input id="uname" type="text" class="form-control"  placeholder="新的称呼" aria-describedby="basic-addon1" value="${user.nickName}">
+																</div>
+																<br />
+																<div class="input-group">
+													                        <span class="input-group-addon" >
+																				<span class="glyphicon glyphicon-time " aria-hidden="true"></span>
+																			</span>
+																	<input id="uphone" type="text" class="form-control"  placeholder="手机号" aria-describedby="basic-addon1" value="${user.phone}">
+
+																</div>
+																<br />
+																<div class="input-group">
+																			<span class="input-group-addon" >
+																				<span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+																			</span>
+																	<input id="uemail" type="email" class="form-control"  placeholder="邮箱" aria-describedby="basic-addon1" value="${user.email}">
+																</div>
+																<br />
+																<div class="modal-footer">
+																	<button type="button" id="mdfUser" value="${user.id?c}" class="btn btn-success">确认修改</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+
+										</tr>
+										</tbody>
+
+									</table>
+
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -211,25 +326,60 @@
 <#--		<script src="/js/jquery.hwslider.min.js"></script>-->
 <#--		<script src="/js/main.js"></script>-->
 		<script>
-			// /*banner*/
-			// $(function() {
-			// 	$("#hwslider").hwSlider({
-			// 		height: 190,
-			// 		autoPlay: true,
-			// 		arrShow: true,
-			// 		dotShow: true,
-			// 		touch: true
-			// 	});
-			// });
-			$("button[name='modify']").click(function(){
-				var needId = $(this).attr("value");
-				var text = $("#" + needId + "desc").val();
-				// var begin = $("#" + needId + "be").val();
-				// var finish = $("#" + needId + "fi").val();
+			/*banner*/
+			$(function() {
+				// $("#hwslider").hwSlider({
+				// 	height: 190,
+				// 	autoPlay: true,
+				// 	arrShow: true,
+				// 	dotShow: true,
+				// 	touch: true
+				// });
+				$("#mdfUser").click(function(){
+					var id = $(this).attr("value");
+					$.post("/user/modify",{id:id,nickName:$("#uname").val(),phone:$("#uphone").val(),email:$("#uemail").val()},function (result) {
+							alert(result);
+							location.reload();
+					})
+				})
 
-				$.post("/need/modifyDesc",{needId:needId,desc:text},function(result){alert(result)});
+				$("button[name='modify']").click(function(){
+					var needId = $(this).attr("value");
+					var text = $("#" + needId + "desc").val();
+					$.post("/need/modifyDesc",{needId:needId,desc:text},function(result){alert(result)});
 
-			})
+				});
+
+				$("button[name='rmNeed']").click(function(){
+					var needId = $(this).attr("needId");
+					if (confirm("您确定要删除该条需求吗？")){
+						$.post("/need/delete",{needId:needId},function(){
+							location.reload();
+						})
+					}
+
+				});
+
+				$("button[name='mdfNeed']").click(function(){
+					var needId = $(this).attr("value");
+					var parent = $(this).parent();
+					var sib = $(parent).siblings();
+					var title = $(sib).find("input[name='title']").val();
+					var time = $(sib).find("input[name='time']").val();
+					var price = $(sib).find("input[name='price']").val();
+					alert(title + time + price);
+
+					$.post("/need/modify",{id:needId,title:title,time:time,price:price},function () {
+							alert("修改成功！");
+							location.reload();
+					})
+
+				});
+			});
+
+
+
+
 		</script>
 	</body>
 

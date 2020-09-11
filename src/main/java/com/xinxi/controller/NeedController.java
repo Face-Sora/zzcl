@@ -50,6 +50,29 @@ public class NeedController extends BaseController {
         return "projectType";
     }
 
+    @GetMapping("/nNeeds")
+    public String nNeeds(int pageNum,int pageSize,ModelMap model){
+        Page<Need> nNeeds = iNeedService.findNNeeds(pageNum, pageSize);
+        model.addAttribute("nNeeds",nNeeds);
+        model.addAttribute("pages",nNeeds.getPages());
+        return "n-needs";
+    }
+
+    @GetMapping("/yNeeds")
+    public String yNeeds(int pageNum,int pageSize,ModelMap model){
+        Page<Need> yNeeds = iNeedService.findYNeeds(pageNum, pageSize);
+        model.addAttribute("yNeeds",yNeeds);
+        model.addAttribute("pages",yNeeds.getPages());
+        return "y-needs";
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String delete(Long needId){
+        iNeedService.removeById(needId);
+        return "ok";
+    }
+
     @GetMapping("/toPublish")
     public String toPublish(ModelMap model,int pageNum, int pageSize){
         List<NeedType> types = iNeedTypeService.list();
@@ -200,20 +223,20 @@ public class NeedController extends BaseController {
         needQueryWrapper.eq("id",needId);
         Need one = iNeedService.getOne(needQueryWrapper);
         String description = one.getDescription();
-
-        if (begin != "" && finish != ""){
-            Date beginDate = simpleDateFormat.parse(begin);
-            Date finishDate = simpleDateFormat.parse(finish);
-            one.setBeginTime(beginDate);
-            one.setFinishTime(finishDate);
-        }else if (begin != "" && finish == ""){
-            Date beginDate = simpleDateFormat.parse(begin);
-            one.setBeginTime(beginDate);
-        }else if (begin == "" && finish != ""){
-            Date finishDate = simpleDateFormat.parse(finish);
-            one.setFinishTime(finishDate);
+        if (begin != null && finish != null) {
+            if (begin != "" && finish != "") {
+                Date beginDate = simpleDateFormat.parse(begin);
+                Date finishDate = simpleDateFormat.parse(finish);
+                one.setBeginTime(beginDate);
+                one.setFinishTime(finishDate);
+            } else if (begin != "" && finish == "") {
+                Date beginDate = simpleDateFormat.parse(begin);
+                one.setBeginTime(beginDate);
+            } else if (begin == "" && finish != "") {
+                Date finishDate = simpleDateFormat.parse(finish);
+                one.setFinishTime(finishDate);
+            }
         }
-
         one.setDescription(desc);
         iNeedService.updateById(one);
         return "修改成功！";
@@ -232,6 +255,13 @@ public class NeedController extends BaseController {
         one.setDescription(desc);
         iNeedService.updateById(one);
         return "修改成功！";
+    }
+
+    @PostMapping("/modify")
+    @ResponseBody
+    public String modify(Need need,Model model) {
+        iNeedService.updateById(need);
+        return "ok";
     }
 
 

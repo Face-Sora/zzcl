@@ -3,8 +3,11 @@ package com.xinxi.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xinxi.entity.LeaveMessage;
 import com.xinxi.entity.Need;
 import com.xinxi.entity.User;
+import com.xinxi.service.ILeaveMessageService;
 import com.xinxi.service.INeedService;
 import com.xinxi.service.IUserService;
 import com.xinxi.service.impl.NeedServiceImpl;
@@ -39,6 +42,9 @@ public class UserController extends BaseController {
 
     @Autowired
     NeedServiceImpl needService;
+
+    @Autowired
+    ILeaveMessageService iLeaveMessageService;
 
     @GetMapping("/toRegister")
     public String toRegister(){return "sigin";}
@@ -84,6 +90,14 @@ public class UserController extends BaseController {
         }
     }
 
+    @GetMapping("/lastUsers")
+    public String lastUsers(int pageNum,int pageSize,ModelMap modelMap){
+        Page<User> lastUsers = userService.findLastUsers(pageNum, pageSize);
+        modelMap.addAttribute("lastUsers",lastUsers);
+        modelMap.addAttribute("pages",lastUsers.getPages());
+        return "last-users";
+    }
+
     @RequestMapping("/checkLogin")
     @ResponseBody
     public String checkLogin(){
@@ -110,6 +124,7 @@ public class UserController extends BaseController {
         List<Need> doNeeds = needService.findByWorkerId(one.getId());
         model.addAttribute("code",1);
         model.addAttribute("doneeds",doNeeds);
+        model.addAttribute("user",one);
         return "zone";
     }
 
@@ -133,17 +148,22 @@ public class UserController extends BaseController {
         }
     }
 
-    @GetMapping("/getAll")
-    public String getAll(ModelMap model){
-        QueryWrapper<User> uqw = new QueryWrapper<>();
-        uqw.eq("tendency",1);
-        List<User> aUsers = userService.list(uqw);
-        uqw.eq("tendency",2);
-        List<User> bUsers = userService.list(uqw);
-        model.addAttribute("ausers",aUsers);
-        model.addAttribute("busers",bUsers);
-        return "users";
+    @GetMapping("/allUsers")
+    public String getAll(ModelMap model,int pageNum,int pageSize){
+        Page<User> users = userService.page(new Page<User>(pageNum, pageSize));
+        model.addAttribute("allUsers",users);
+        model.addAttribute("pages",users.getPages());
+        return "allUsers";
     }
+
+    @GetMapping("/leaveMessages")
+    public String getLeaveMessages(ModelMap model,int pageNum,int pageSize){
+        Page<LeaveMessage> messages = iLeaveMessageService.page(new Page<LeaveMessage>(pageNum, pageSize));
+        model.addAttribute("leaveMessages",messages);
+        model.addAttribute("pages",messages.getPages());
+        return "leaveMessages";
+    }
+
 
     @PostMapping("/updateStatus")
     @ResponseBody
@@ -157,4 +177,12 @@ public class UserController extends BaseController {
         userService.updateById(user);
         return "ok";
     }
+
+    @PostMapping("/modify")
+    @ResponseBody
+    public String modifyUser(User user){
+        userService.updateById(user);
+        return "修改成功";
+    }
+
 }

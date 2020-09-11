@@ -1,9 +1,11 @@
 package com.xinxi.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xinxi.entity.Need;
 import com.xinxi.entity.NeedType;
 import com.xinxi.entity.User;
+import com.xinxi.service.ILeaveMessageService;
 import com.xinxi.service.INeedService;
 import com.xinxi.service.INeedTypeService;
 import com.xinxi.service.IUserService;
@@ -40,6 +42,9 @@ public class IndexController extends BaseController{
 
     @Autowired
     IUserService userService;
+
+    @Autowired
+    ILeaveMessageService iLeaveMessageService;
 
     @RequestMapping("/")
     public String toMain(Model model){
@@ -100,6 +105,16 @@ public class IndexController extends BaseController{
         model.addAttribute("code", 5);
         return "we";}
 
+    @GetMapping("/toAdmin")
+    public String toAdmin(){
+        String phone = (String) SecurityUtils.getSubject().getPrincipal();
+
+        if (phone != null && phone.equals("110120119")){
+            return "all-admin-index";}
+        else {
+            return "login";
+        }
+    }
 
     @GetMapping("/admin")
     public String admin(ModelMap model){
@@ -108,42 +123,7 @@ public class IndexController extends BaseController{
         if (phone != null && phone.equals("110120119")){
 
             QueryWrapper<Need> nqw = new QueryWrapper<>();
-
-
-            List<User> users = userService.list();
-
-            nqw.eq("status","y");
-            List<Need> needs = needService.list(nqw);
-            for (Need need:needs) {
-                Long userId = need.getUserId();
-                Long workerId = need.getWorkerId();
-                Character progress = need.getProgress();
-                QueryWrapper<User> uqw = new QueryWrapper<>();
-                uqw.eq("id",userId);
-                User user = userService.getOne(uqw);
-                need.setUser(user);
-                uqw.clear();
-                uqw.eq("id",workerId);
-                User worker = userService.getOne(uqw);
-                need.setWorker(worker);
-                QueryWrapper<NeedType> qw = new QueryWrapper<>();
-                qw.eq("id",need.getClassify());
-                NeedType needType = needTypeService.getOne(qw);
-                need.setNeedType(needType);
-                if (progress != null){
-                    if (progress == 'w'){
-                        need.setProgressStr("未接单");
-                    }else if (progress == 'i'){
-                        need.setProgressStr("进行中");
-                    }else if (progress == 'f'){
-                        need.setProgressStr("已完成");
-                    }
-                } else {
-                    need.setProgressStr("");
-                }
-            }
-
-            nqw.clear();
+            List<Need> needs = needService.list();
             nqw.eq("status",'n');
             List<Need> lastNeeds = needService.list(nqw);
             for (Need need:lastNeeds) {
@@ -158,25 +138,19 @@ public class IndexController extends BaseController{
                 need.setNeedType(needType);
             }
 
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String today = simpleDateFormat.format(new Date());
-            ArrayList<User> lastUsers = new ArrayList<>();
-            for (User user:users) {
-                if (simpleDateFormat.format(user.getCreateTime()).equals(today)){
-                    lastUsers.add(user);
-                }
-            }
+            List<User> users = userService.list();
+            Page<User> lastUsers = userService.findLastUsers(1, 100);
 
 
             model.addAttribute("totalusernum",users.size());
             model.addAttribute("totalneednum",needs.size());
-            model.addAttribute("lastusernum",lastUsers.size());
+            model.addAttribute("lastusernum",lastUsers.getTotal());
             model.addAttribute("lastneednum",lastNeeds.size());
 
-            model.addAttribute("totalusers",users);
-            model.addAttribute("totalneeds",needs);
-            model.addAttribute("lastusers",lastUsers);
+            model.addAttribute("lastusers",lastUsers.getRecords());
             model.addAttribute("lastneeds",lastNeeds);
+
+            model.addAttribute("leaveMessagesSize",iLeaveMessageService.list().size());
             return "admin";
         }
 

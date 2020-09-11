@@ -73,6 +73,7 @@
 										</div>
 										<div class="col-sm-6"><p>${need.description}</p></div>
 										<div class="col-sm-2 time">
+											<div style="color: #c87f0a">更新于</div>
 											<strong>${need.updateTime?string("dd")}</strong>
 											<time>${need.updateTime?string("yyyy-MM")}</time>
 										</div>
@@ -84,7 +85,9 @@
 								</#if>
 							</ul>
 							<div class="page tc clearfix" id="pages">
+								<#if needs.current gt 1>
 								<a href="/need/needList?pageNum=${needs.current-1}&pageSize=1&classify=${classify}" class="prev"><em></em>上一页</a>
+								</#if>
 								<#if pages==0>
 									<a href="/need/needList?pageNum=1&pageSize=1&classify=${classify}">1</a>
 									<#else>
@@ -92,7 +95,9 @@
 								<a href="/need/needList?pageNum=${i}&pageSize=1&classify=${classify}">${i}</a>
 								</#list>
 								</#if>
+								<#if needs.current < pages>
 								<a href="/need/needList?pageNum=${needs.current+1}&pageSize=1&classify=${classify}" class="next">下一页<em></em></a>
+								</#if>
 							</div>
 						</div>
 					</div>

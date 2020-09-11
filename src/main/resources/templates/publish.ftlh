@@ -96,11 +96,15 @@
 							</#if>
 						</ul>
 						<div class="page tc clearfix">
+							<#if needs.current gt 1>
 							<a href="/need/toPublish?pageNum=${needs.current-1}&pageSize=${needs.size}" class="prev"><em></em>上一页</a>
+							</#if>
 							<#list 1..pages as i>
 							<a href="/need/toPublish?pageNum=${i}&pageSize=${needs.size}">${i}</a>
 							</#list>
+							<#if needs.current < pages>
 							<a href="/need/toPublish?pageNum=${needs.current+1}&pageSize=${needs.size}" class="next">下一页<em></em></a>
+							</#if>
 						</div>
 					</div>
 				</div>

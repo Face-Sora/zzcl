@@ -23,4 +23,8 @@ public interface INeedService extends IService<Need> {
     List<Need> findByUserId(Long userId);
 
     Page<Need> listToPage(int pageNum,int pageSize);
+
+    Page<Need> findNNeeds(int pageNum,int pageSize);
+
+    Page<Need> findYNeeds(int pageNum, int pageSize);
 }

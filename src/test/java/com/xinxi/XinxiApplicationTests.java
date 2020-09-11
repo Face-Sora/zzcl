@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.DigestUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,7 @@ import java.util.Map;
 public class XinxiApplicationTests {
     @Test
     public void contextLoads() {
-        String s = DigestUtils.md5DigestAsHex("112233".getBytes());
-        System.out.println(s);
+        System.out.println(new Date().getTime());
     }
 
 }

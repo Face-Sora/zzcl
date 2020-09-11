@@ -82,23 +82,38 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">立即留言</h4>
             </div>
+
             <div class="modal-body">
                 <div class="form-bd clearfix">
                     <div class="form-group form-one">
-                        <input type="text" name="name" class="form-control" id="first-name" placeholder="姓名" required="required">
+                        <input type="text" name="username" class="form-control"  placeholder="姓名" required="required">
                     </div>
                     <div class="form-group form-tow">
-                        <input type="text" name="phone" class="form-control" id="lphone" placeholder="手机" required="required">
+                        <input type="text" name="phone" class="form-control"  placeholder="手机" required="required">
                     </div>
                     <div class="form-group form-three massage-contact">
-                        <textarea rows="9" name="message" class="form-control xiala" id="description" placeholder="留言内容" required="required"></textarea>
+                        <textarea rows="9" name="message" class="form-control xiala"  placeholder="留言内容" required="required"></textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="alert('你的留言我们已经收到，感谢您的宝贵建议！')">提交</button>
+                <button type="button" class="btn btn-primary" form="savemessage" onclick="saveMessage()">提交</button>
             </div>
+
         </div>
     </div>
 </div>
+
+<script>
+    function saveMessage(){
+        var name = $("input[name='username']").val();
+        var phone = $("input[name='phone']").val();
+        var message = $("textarea[name='message']").val();
+        $.post("/message/save",{username:name,phone:phone,message:message},function (result) {
+            alert("你的留言已发送至后台，感谢您的宝贵建议！");
+            $("#myModal").hide();
+        })
+
+    }
+</script>

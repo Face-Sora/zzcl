@@ -84,6 +84,69 @@ public class NeedServiceImpl extends ServiceImpl<NeedMapper, Need> implements IN
         return needs;
     }
 
+    @Override
+    public Page<Need> findNNeeds(int pageNum, int pageSize) {
+        Page<Need> page = new Page<>(pageNum, pageSize);
+        QueryWrapper<Need> needQueryWrapper = new QueryWrapper<>();
+        needQueryWrapper.eq("status",'n');
+        Page<Need> needs = super.page(page, needQueryWrapper);
+        for (Need need:needs.getRecords()) {
+            Long classify = need.getClassify();
+            QueryWrapper<NeedType> needTypeQueryWrapper = new QueryWrapper<>();
+            needTypeQueryWrapper.eq("id",classify);
+            NeedType type = needTypeService.getOne(needTypeQueryWrapper);
+            need.setNeedType(type);
+
+            Long userId = need.getUserId();
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id",userId);
+            User user = userService.getOne(queryWrapper);
+            need.setUser(user);
+        }
+        return needs;
+    }
+
+    @Override
+    public Page<Need> findYNeeds(int pageNum, int pageSize) {
+        Page<Need> page = new Page<>(pageNum, pageSize);
+        QueryWrapper<Need> needQueryWrapper = new QueryWrapper<>();
+        needQueryWrapper.eq("status",'y');
+        Page<Need> needs = super.page(page, needQueryWrapper);
+        for (Need need:needs.getRecords()) {
+            Long classify = need.getClassify();
+            QueryWrapper<NeedType> needTypeQueryWrapper = new QueryWrapper<>();
+            needTypeQueryWrapper.eq("id",classify);
+            NeedType type = needTypeService.getOne(needTypeQueryWrapper);
+            need.setNeedType(type);
+
+            Long userId = need.getUserId();
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id",userId);
+            User user = userService.getOne(queryWrapper);
+            need.setUser(user);
+
+            Long workerId = need.getWorkerId();
+            queryWrapper.clear();
+            queryWrapper.eq("id",workerId);
+            User worker = userService.getOne(queryWrapper);
+            need.setWorker(worker);
+
+            Character progress = need.getProgress();
+            if (progress != null){
+                if (progress == 'w'){
+                    need.setProgressStr("未接单");
+                }else if (progress == 'i'){
+                    need.setProgressStr("进行中");
+                }else if (progress == 'f'){
+                    need.setProgressStr("已完成");
+                }
+            } else {
+                need.setProgressStr("");
+            }
+        }
+        return needs;
+    }
+
     public List<Need> findByWorkerId(Long workerId){
         QueryWrapper<Need> needQueryWrapper = new QueryWrapper<>();
         needQueryWrapper.eq("worker_id",workerId);

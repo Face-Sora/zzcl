@@ -42,7 +42,7 @@
 		<h2>需求方参与流程</h2>
 		<ul class="clearfix">
 			<li class="col-xs-12 col-sm-6 col-md-4 clearfix">
-				<a href="javascript:;">
+				<a href="/need/toPublish?pageNum=1&pageSize=3">
 					<div class="f1">
 						<div><img src="/images/2-01.png"></div>
 						<div class="ser">
@@ -64,7 +64,7 @@
 				</a>
 			</li>
 			<li class="col-xs-12 col-sm-6 col-md-4 clearfix">
-				<a href="#">
+				<a href="/need/needList?pageNum=1&pageSize=5&classify=23">
 					<div class="f3">
 						<div><img src="/images/2-03.png"></div>
 						<div class="">
