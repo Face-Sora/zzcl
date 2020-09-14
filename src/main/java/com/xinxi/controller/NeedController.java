@@ -93,6 +93,13 @@ public class NeedController extends BaseController {
         model.addAttribute("needTypes",types);
 
         Page<Need> needs = iNeedService.findByClassifyToPage(pageNum, pageSize, classify);
+        for (Need need:needs.getRecords()) {
+            User user = need.getUser();
+            String phone = user.getPhone();
+            phone = phone.replace(phone.substring(3,7),"****");
+            user.setPhone(phone);
+            need.setUser(user);
+        }
 
         model.addAttribute("pages",needs.getPages());
         model.addAttribute("needs",needs);

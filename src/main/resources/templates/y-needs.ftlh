@@ -107,6 +107,7 @@
                                 <td>${need.updateTime?string("yyyy-MM-dd")}</td>
                                 <td>
                                     <span id="${need.id}1">${(need.status == 'y')?string("审核通过","未审核")}</span>
+                                    <br>
                                     <button type="button" class="btn btn-success btn-xs glyphicon glyphicon-ok" char="y" name="pass" value="${need.id}"></button>
                                     <button type="button" class="btn btn-warning btn-xs glyphicon glyphicon-remove" char="n" name="pass" value="${need.id}"></button>
                                 </td>

@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xinxi.entity.Need;
 import com.xinxi.entity.NeedType;
 import com.xinxi.entity.User;
-import com.xinxi.service.ILeaveMessageService;
-import com.xinxi.service.INeedService;
-import com.xinxi.service.INeedTypeService;
-import com.xinxi.service.IUserService;
+import com.xinxi.service.*;
 import com.xinxi.service.impl.NeedTypeServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -45,6 +42,9 @@ public class IndexController extends BaseController{
 
     @Autowired
     ILeaveMessageService iLeaveMessageService;
+
+    @Autowired
+    IApplyService iApplyService;
 
     @RequestMapping("/")
     public String toMain(Model model){
@@ -151,6 +151,7 @@ public class IndexController extends BaseController{
             model.addAttribute("lastneeds",lastNeeds);
 
             model.addAttribute("leaveMessagesSize",iLeaveMessageService.list().size());
+            model.addAttribute("applynum",iApplyService.count());
             return "admin";
         }
 

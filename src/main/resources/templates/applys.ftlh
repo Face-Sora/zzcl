@@ -9,7 +9,7 @@
 
 
 
-    <title>众智创联后台数据管理</title>
+    <title>项目申请</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -49,98 +49,107 @@
     <link rel="stylesheet" href="/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
 
-<body class="hold-transition skin-purple sidebar-mini">
+<body>
 
-    <div class="wrapper">
+    <!-- 内容头部 -->
+    <!-- 内容头部 /-->
 
-        <!-- 页面头部 -->
-        <header class="main-header">
+    <!-- 正文区域 -->
+    <section class="content">
 
+        <!-- .box-body -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">未审核需求列表</h3>
+            </div>
 
-            <!-- Logo -->
-            <a href="all-admin-index.html" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>数据</b></span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>数据</b>后台管理</span>
-            </a>
+            <div class="box-body">
 
+                <!-- 数据表格 -->
+                <div class="table-box">
 
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
-            </nav>
-        </header>
-        <!-- 页面头部 /-->
+                    <!--工具栏-->
 
-        <!-- 导航侧栏 -->
-        <aside class="main-sidebar" >
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- sidebar menu: : style can be found in sidebar.less -->`x`
-                <ul class="sidebar-menu" name="menu">
-                    <li class="header">菜单</li>
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback">
+                            <input type="text" class="form-control input-sm" placeholder="搜索">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!--工具栏/-->
 
-                    <li id="admin-index" url="/admin"> <a href="#"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
+                    <!--数据列表-->
+                    <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                        <thead>
+                        <tr>
+                            <th class="">标题</th>
+                            <th class="">发布者</th>
+                            <th class="">联系方式</th>
+                            <th class="">发布时间</th>
+                            <th class="">申请者</th>
+                            <th class="">申请者电话</th>
+                            <th class="">申请时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <#list applys.records as apply>
+                            <tr>
+                                <td>${apply.need.title}</td>
+                                <td>${apply.need.user.nickName}</td>
+                                <td>${apply.need.user.phone}</td>
+                                <td>${apply.need.createTime?string("yyyy-MM-dd")}</td>
+                                <td>${apply.applicant.nickName}</td>
+                                <td>${apply.applicant.phone}</td>
+                                <td>${apply.createTime?string("yyyy-MM-dd")}</td>
+                            </tr>
+                        </#list>
 
-                    <!-- 菜单 -->
+                        </tbody>
+                    </table>
+                    <!--数据列表/-->
 
-                    <li  url="/need/nNeeds?pageNum=1&pageSize=8">
-                        <a href="#">
-                            <i class="fa fa-folder"></i> <span>未审核需求</span>
-                        </a>
-                    </li>
-
-                    <li  url="/need/yNeeds?pageNum=1&pageSize=8">
-                        <a href="#">
-                            <i class="fa fa-book"></i> <span>已审核需求</span>
-                        </a>
-                    </li>
-
-                    <li  url="/apply/applyList?pageNum=1&pageSize=8">
-                        <a href="#">
-                            <i class="fa fa-book"></i> <span>项目申请</span>
-                        </a>
-                    </li>
-
-                    <li  url="/user/lastUsers?pageNum=1&pageSize=8">
-                        <a href="#">
-                            <i class="fa fa-user"></i> <span>新注册用户</span>
-                        </a>
-                    </li>
-
-                    <li  url="/user/allUsers?pageNum=1&pageSize=4">
-                        <a href="#">
-                            <i class="fa fa-users"></i> <span>全部用户</span>
-                        </a>
-                    </li>
-
-                    <li  url="/user/leaveMessages?pageNum=1&pageSize=7">
-                        <a href="#">
-                            <i class="fa fa-sticky-note"></i> <span>用户留言</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
-        <!-- 导航侧栏 /-->
+                </div>
+                <!-- 数据表格 /-->
 
 
-        <!-- 内容区域 -->
-        <div class="content-wrapper" id="con" >
-            <iframe src="/admin" frameborder="0" width="100%" height="100%" id="ifr"></iframe>
+            </div>
+            <!-- /.box-body -->
+
+            <!-- .box-footer-->
+            <div class="box-footer">
+                <div class="pull-left">
+                    <div class="form-group form-inline">
+                        总共${pages} 页，共${applys.total}条数据。 每页${applys.size}条
+                    </div>
+                </div>
+
+                <div class="box-tools pull-right">
+                    <ul class="pagination">
+                        <li>
+                            <a href="/apply/applyList?pageNum=1&pageSize=${applys.size}" aria-label="Previous">首页</a>
+                        </li>
+                        <li><a href="/apply/applyList?pageNum=${applys.current-1}&pageSize=${applys.size}">上一页</a></li>
+                        <#list 1..pages as i>
+                            <li><a href="/apply/applyList?pageNum=${i}&pageSize=${applys.size}">${i}</a></li>
+                        </#list>
+                        <li><a href="/apply/applyList?pageNum=${applys.current+1}&pageSize=${applys.size}">下一页</a></li>
+                        <li>
+                            <a href="/apply/applyList?pageNum=${pages}&pageSize=${applys.size}" aria-label="Next">尾页</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /.box-footer-->
+
+
+
         </div>
-        <!-- 内容区域 /-->
 
-        <!-- 底部导航 -->
-        <!-- 底部导航 /-->
+    </section>
+    <!-- 正文区域 /-->
 
-    </div>
+<!-- @@close -->
 
 
     <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -199,14 +208,6 @@
             $(".textarea").wysihtml5({
                 locale: 'zh-CN'
             });
-            $("#ifr").height($("#con").height());
-
-            $("ul[name='menu'] li").click(function () {
-                var parent = $(this).parent();
-                $(parent).find("li").removeClass("active");
-                $(this).addClass("active");
-                $("#ifr").prop("src",$(this).attr("url"));
-            })
         });
 
 

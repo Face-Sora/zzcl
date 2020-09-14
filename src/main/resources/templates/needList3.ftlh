@@ -62,8 +62,8 @@
 								<#if (needs.records?size>0)>
 									<#list needs.records as need>
 								<li class="clearfix">
-									<div class="col-sm-10">
-										<div class="col-sm-4">
+									<div class="col-sm-12">
+										<div class="col-sm-3">
 											<h4><a href="">${need.title}</a></h4>
 											<span class="glyphicon glyphicon-user"></span><span>${need.user.nickName}</span>
 											<span class="glyphicon glyphicon-phone"></span><span>${need.user.phone}</span>
@@ -72,10 +72,14 @@
 											<span style="color: #c87f0a">截止日期：</span><span>${need.deadLine}</span>
 										</div>
 										<div class="col-sm-6"><p>${need.description}</p></div>
-										<div class="col-sm-2 time">
+										<div class="col-sm-2 time" style="float: right">
 											<div style="color: #c87f0a">更新于</div>
 											<strong>${need.updateTime?string("dd")}</strong>
 											<time>${need.updateTime?string("yyyy-MM")}</time>
+										</div>
+										<div class="col-sm-1" style="margin-top: 1.5cm;float: right">
+											<button name="apply" needId="${need.id}" class="btn-info"><strong>申请参与</strong></button>
+											<button name="apply" needId="${need.id}" class="btn-success" style="display: none"><strong>申请成功</strong></button>
 										</div>
 									</div>
 								</li>
@@ -119,6 +123,28 @@
 					arrShow: true,
 					dotShow: true,
 					touch: true
+				});
+
+				$(".btn-info[name='apply']").click(function () {
+					var needId = $(this).attr("needid");
+					$.post("/apply/save", {needId: needId}, (result) => {
+						console.log(result);
+						if (result.success) {
+							alert("您已成功申请该项目，请与客服联系，或等待客服与您联系！");
+							$(this).css("display", "none");
+							$(".btn-success[name='apply']").css("display", "block");
+						} else {
+							$("#login_modal").modal("show");
+						}
+					});
+				});
+					$(".btn-success[name='apply']").click(function () {
+						var needId = $(this).attr("needid");
+						$.post("/apply/delete", {needId: needId},() => {
+							alert("您已成功取消申请该项目");
+							$(this).css("display", "none");
+							$(".btn-info[name='apply']").css("display", "block");
+						});
 				});
 			});
 
