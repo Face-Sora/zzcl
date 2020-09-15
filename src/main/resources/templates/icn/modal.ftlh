@@ -231,7 +231,7 @@
                 success: function (result) {
                     if (result == "success") {
                         $("#login_modal").modal("hide");
-                        location.href = "/user/tozone";
+                        window.open("/user/tozone",'_blank');
                     } else {
                         alert(result);
                     }

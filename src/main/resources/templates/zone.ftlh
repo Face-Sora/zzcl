@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="">
-		<title>众智创联云科技（山东）有限公司</title>
+		<title>众智联云科技（山东）有限公司</title>
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/hwslider.css" rel="stylesheet">
 		<link href="/css/fonts.css" rel="stylesheet">
@@ -300,8 +300,8 @@
 		<footer>
 			<section class="footera">
 				<div class="footera-sg">
-					<p class="footera-sgp">众智创联云科技(山东)有限公司&nbsp;&nbsp;&nbsp;联系电话：400-0256 757&nbsp;&nbsp;&nbsp;地址：山东省淄博市张店区新村西路185号</p>
-					<p class="footera_p">Copyright &copy; 众智创联云科技(山东)有限公司 鲁ICP备14043160号-5&nbsp;&nbsp; 版权所有</p>
+					<p class="footera-sgp">众智联云科技(山东)有限公司&nbsp;&nbsp;&nbsp;联系电话：400-0256 757&nbsp;&nbsp;&nbsp;地址：山东省淄博市张店区新村西路185号</p>
+					<p class="footera_p">Copyright &copy; 众智联云科技(山东)有限公司 鲁ICP备14043160号-5&nbsp;&nbsp; 版权所有</p>
 				</div>
 			</section>
 		</footer>

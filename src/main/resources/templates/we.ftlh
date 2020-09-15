@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="">
-		<title>众智创联云科技（山东）有限公司</title>
+		<title>众智联云科技（山东）有限公司</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/hwslider.css" rel="stylesheet">
 		<link href="css/fonts.css" rel="stylesheet">
@@ -112,7 +112,7 @@
 			function addMapOverlay() {
 				var markers = [{
 					content: "山东省淄博市张店区马尚镇新村西路185号",
-					title: "众智创联云科技（山东）有限公司",
+					title: "众智联云科技（山东）有限公司",
 					imageOffset: {
 						width: 0,
 						height: 0
@@ -190,7 +190,7 @@
 		    }
 		    function addMapOverlay(){
 		      var markers = [
-		        {content:"淄博市张店区新村西路185号电商创业园",title:"众智创联云科技（山东）有限公司",imageOffset: {width:0,height:3},position:{lat:36.809045,lng:118.021588}}
+		        {content:"淄博市张店区新村西路185号电商创业园",title:"众智联云科技（山东）有限公司",imageOffset: {width:0,height:3},position:{lat:36.809045,lng:118.021588}}
 		      ];
 		      for(var index = 0; index < markers.length; index++ ){
 		        var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);

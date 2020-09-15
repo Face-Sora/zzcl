@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
-	<title>众智创联云科技(山东)有限公司</title>
+	<title>众智联云科技(山东)有限公司</title>
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/hwslider.css" rel="stylesheet">
 	<link href="/css/fonts.css" rel="stylesheet">
@@ -231,7 +231,7 @@
 				<div class="myscroll">
 					<ul>
 						<li>
-							<a href="">淄博深科科技有限公司</a><time class="right">2020-06</time>
+							<a href="">淄博深科信息科技有限公司</a><time class="right">2020-06</time>
 						</li>
 						<li>
 							<a href="">淄博鑫展翔机电有限公司</a><time class="right">2020-06</time>
@@ -243,7 +243,7 @@
 							<a href="">淄博众成机器人科技有限公司</a><time class="right">2020-06</time>
 						</li>
 						<li>
-							<a href="">山东金聚丰软件有限公司</a><time class="right">2020-06</time>
+							<a href="">山东金巨丰软件有限公司</a><time class="right">2020-06</time>
 						</li>
 					</ul>
 				</div>

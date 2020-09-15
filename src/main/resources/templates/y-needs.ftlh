@@ -71,9 +71,9 @@
                     <!--工具栏-->
 
                     <div class="box-tools pull-right">
-                        <div class="has-feedback">
-                            <input type="text" class="form-control input-sm" placeholder="搜索">
-                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        <div>
+                            <input id="phone" type="text" class="input-sm" placeholder="搜索">
+                            <button id="search"><span class="glyphicon glyphicon-search"></span></button>
                         </div>
                     </div>
                     <!--工具栏/-->
@@ -352,6 +352,10 @@
             });
         });
 
+        $("#search").click(function () {
+            var phone = $("#phone").val();
+            location.href = "/need/yNeedByPhone?phone="+phone + "&pageNum=1&pageSize=8";
+        })
 
         // 设置激活菜单
         function setSidebarActive(tagUri) {

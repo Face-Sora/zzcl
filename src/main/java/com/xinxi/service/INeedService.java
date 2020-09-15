@@ -27,4 +27,6 @@ public interface INeedService extends IService<Need> {
     Page<Need> findNNeeds(int pageNum,int pageSize);
 
     Page<Need> findYNeeds(int pageNum, int pageSize);
+
+    Page<Need> findYNeedsByUserPhone(String phone,int pageNum, int pageSize);
 }

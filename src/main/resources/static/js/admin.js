@@ -110,8 +110,9 @@ $(document).ready(function() {
         var text = $("#" + needId + "desc").val();
         var begin = $("#" + needId + "be").val();
         var finish = $("#" + needId + "fi").val();
-
         $.post("/need/modifyDescAndDate",{needId:needId,desc:text,begin:begin,finish:finish},function(result){alert(result)});
 
     })
+
+
 });

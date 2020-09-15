@@ -1,6 +1,7 @@
 package com.xinxi.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.xinxi.entity.BaseEntity;
 import lombok.Data;
@@ -86,9 +87,11 @@ public class Need extends BaseEntity {
     private Date updateTime;
 
     //开工日期
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Date beginTime;
 
     //完成日期
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Date finishTime;
 
 }

@@ -9,7 +9,7 @@
 
 
 
-    <title>众智创联后台数据管理</title>
+    <title>众智联后台数据管理</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 

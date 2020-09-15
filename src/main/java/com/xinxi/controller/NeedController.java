@@ -109,6 +109,14 @@ public class NeedController extends BaseController {
         return "needList3";
     }
 
+    @GetMapping("/yNeedByPhone")
+    public String yNeedByPhone(String phone,int pageNum,int pageSize,Model model){
+        Page<Need> yNeedsByUserPhone = iNeedService.findYNeedsByUserPhone(phone, pageNum, pageSize);
+        model.addAttribute("yNeeds",yNeedsByUserPhone);
+        model.addAttribute("pages",yNeedsByUserPhone.getPages());
+        return "y-needs";
+    }
+
     @GetMapping("/findByTypeName")
     public String findByType(String needName, ModelMap model){
         HashMap<String, String> map = new HashMap<>();
@@ -232,18 +240,33 @@ public class NeedController extends BaseController {
         String description = one.getDescription();
         if (begin != null && finish != null) {
             if (begin != "" && finish != "") {
-                Date beginDate = simpleDateFormat.parse(begin);
-                Date finishDate = simpleDateFormat.parse(finish);
-                one.setBeginTime(beginDate);
-                one.setFinishTime(finishDate);
+                if (begin.equals("0001-01-01") && finish.equals("0001-01-01")){
+                    one.setBeginTime(null);
+                    one.setFinishTime(null);
+                }else{
+                    Date beginDate = simpleDateFormat.parse(begin);
+                    Date finishDate = simpleDateFormat.parse(finish);
+                    one.setBeginTime(beginDate);
+                    one.setFinishTime(finishDate);
+                }
             } else if (begin != "" && finish == "") {
-                Date beginDate = simpleDateFormat.parse(begin);
-                one.setBeginTime(beginDate);
+                if (begin.equals("0001-01-01")){
+                    one.setBeginTime(null);
+                }else{
+                    Date beginDate = simpleDateFormat.parse(begin);
+                    one.setBeginTime(beginDate);
+                }
             } else if (begin == "" && finish != "") {
-                Date finishDate = simpleDateFormat.parse(finish);
-                one.setFinishTime(finishDate);
+                if (finish.equals("0001-01-01")){
+                    one.setFinishTime(null);
+                }else {
+                    Date finishDate = simpleDateFormat.parse(finish);
+                    one.setFinishTime(finishDate);
+                }
+
             }
         }
+
         one.setDescription(desc);
         iNeedService.updateById(one);
         return "修改成功！";

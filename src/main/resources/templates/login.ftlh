@@ -98,7 +98,7 @@
 <div class="box">
         <div class="login-box">
             <div class="login-title text-center">
-                <h1><small>众智创联项目对接平台</small></h1>
+                <h1><small>众智联项目对接平台</small></h1>
             </div>
             <div class="login-content ">
             <div class="form">

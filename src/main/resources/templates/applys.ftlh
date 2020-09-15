@@ -60,7 +60,7 @@
         <!-- .box-body -->
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">未审核需求列表</h3>
+                <h3 class="box-title">项目申请列表</h3>
             </div>
 
             <div class="box-body">
