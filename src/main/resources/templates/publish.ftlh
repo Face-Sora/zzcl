@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="">
-		<title>众智联云科技（山东）有限公司</title>
+		<title>众智创联云科技（山东）有限公司</title>
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/hwslider.css" rel="stylesheet">
 		<link href="/css/fonts.css" rel="stylesheet">
@@ -95,7 +95,7 @@
 								<li class="clearfix">该类需求暂时无人发布！</li>
 							</#if>
 						</ul>
-						<div class="page tc clearfix">
+						<div class="page tc clearfix" id="pages">
 							<#if needs.current gt 1>
 							<a href="/need/toPublish?pageNum=${needs.current-1}&pageSize=${needs.size}" class="prev"><em></em>上一页</a>
 							</#if>
@@ -135,6 +135,15 @@
 						};
 					});
 				}
+
+				$("#pages a").each(function(value){
+					var index = $(this).text();
+					console.log(index)
+					if (index == ${needs.current}){
+
+						$(this).addClass("active")
+					}
+				})
 
 				$("#submit").click(function () {
 					var type = $("#type").val();

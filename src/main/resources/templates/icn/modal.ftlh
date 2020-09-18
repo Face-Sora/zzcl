@@ -159,6 +159,57 @@
     </div>
 </div>
 
+<div class="modal fade" id="apply_success_modal" tabindex="-1" role="dialog" aria-labelledby="apply-success">
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="apply-success">申请成功</h4>
+            </div>
+            <div class="modal-body">
+                    <span>您已成功申请该项目，请与客服联系，或等待客服与您联系！</span>
+            </div>
+            <div class="modal-footer">
+                <input id="login" type="submit" class="btn btn-success" data-dismiss="modal" value="关闭" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="apply_cancel_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">取消申请成功</h4>
+            </div>
+            <div class="modal-body">
+                <span>您已成功取消申请该项目！</span>
+            </div>
+            <div class="modal-footer">
+                <input id="login" type="submit" class="btn btn-success"  data-dismiss="modal" value="关闭" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="apply_repeat_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">重复申请</h4>
+            </div>
+            <div class="modal-body">
+                <span>您已经申请过该项目，请勿重复申请！</span>
+            </div>
+            <div class="modal-footer">
+                <input id="login" type="submit" class="btn btn-success" data-dismiss="modal" value="关闭" />
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(function () {
         var check = "";

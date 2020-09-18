@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>众智联后台管理</title>
+    <title>众智创联后台管理</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -63,9 +63,9 @@
 
             <!-- 统计数值 -->
             <div class="row">
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
-                    <div class="small-box bg-aqua">
+                    <div class="small-box bg-red">
                         <div class="inner">
                             <h3>${lastneednum}</h3>
 
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-green">
                         <div class="inner">
@@ -92,9 +92,9 @@
                 </div>
                 <!-- ./col -->
                 <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
-                    <div class="small-box bg-green">
+                    <div class="small-box bg-orange">
                         <div class="inner">
                             <h3>${applynum}</h3>
 
@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-yellow">
                         <div class="inner">
@@ -120,9 +120,9 @@
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
-                    <div class="small-box bg-red">
+                    <div class="small-box bg-green">
                         <div class="inner">
                             <h3>${totalusernum}</h3>
 
@@ -136,7 +136,7 @@
                 <!-- ./col -->
 
                 <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-light-blue">
                         <div class="inner">
@@ -146,6 +146,22 @@
                         </div>
                         <div class="icon">
                             <i class="ion ion-email"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./col -->
+
+                <!-- ./col -->
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>${todayAccessNum}</h3>
+
+                            <p>日活跃度</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-eye"></i>
                         </div>
                     </div>
                 </div>

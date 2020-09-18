@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="">
-		<title>众智联云科技(山东)有限公司</title>
+		<title>众智创联云科技(山东)有限公司</title>
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/hwslider.css" rel="stylesheet">
 		<link href="/css/fonts.css" rel="stylesheet">
@@ -125,25 +125,42 @@
 					touch: true
 				});
 
+				$("#pages a").each(function(value){
+					var index = $(this).text();
+					console.log(index)
+					if (index == ${needs.current}){
+
+						$(this).addClass("active")
+					}
+				})
+
 				$(".btn-info[name='apply']").click(function () {
 					var needId = $(this).attr("needid");
 					var parent = $(this).parent();
 					$.post("/apply/save", {needId: needId}, (result) => {
 						console.log(result);
 						if (result.success) {
-							alert("您已成功申请该项目，请与客服联系，或等待客服与您联系！");
+							$("#apply_success_modal").modal("show")
 							$(this).css("display", "none");
 							$(parent).find(".btn-success[name='apply']").css("display", "block");
 						} else {
-							$("#login_modal").modal("show");
+							if (result.error == "notLogin"){
+								$("#login_modal").modal("show");
+							}
+							else{
+								$("#apply_repeat_modal").modal("show");
+								$(this).css("display", "none");
+								$(parent).find(".btn-success[name='apply']").css("display", "block");
+							}
+
 						}
 					});
 				});
 					$(".btn-success[name='apply']").click(function () {
 						var needId = $(this).attr("needid");
 						var parent = $(this).parent();
-						$.post("/apply/delete", {needId: needId},() => {
-							alert("您已成功取消申请该项目");
+						$.post("/apply/cancel", {needId: needId},() => {
+							$("#apply_cancel_modal").modal("show");
 							$(this).css("display", "none");
 							$(parent).find(".btn-info[name='apply']").css("display", "block");
 						});

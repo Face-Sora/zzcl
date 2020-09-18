@@ -1102,8 +1102,14 @@ textarea {
 }
 
 @media only screen and (max-width:768px) {
-	.he-top {
+	.he-top .left, .he-top .right, .he-top .btn{
 		display: none;
+	}
+	.he-top .container .btn-success{
+		display: block;
+	}
+	.he-top {
+		display: block;
 	}
 	.introduce {
 		display: none;

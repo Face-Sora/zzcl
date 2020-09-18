@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.*;
 import java.lang.reflect.Array;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 public class IndexController extends BaseController{
@@ -45,6 +45,8 @@ public class IndexController extends BaseController{
 
     @Autowired
     IApplyService iApplyService;
+
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @RequestMapping("/")
     public String toMain(Model model){
@@ -108,7 +110,8 @@ public class IndexController extends BaseController{
     @GetMapping("/toAdmin")
     public String toAdmin(){
         String phone = (String) SecurityUtils.getSubject().getPrincipal();
-
+        log.info("phone = ",phone);
+        log.warn(phone);
         if (phone != null && phone.equals("110120119")){
             return "all-admin-index";}
         else {
@@ -117,7 +120,7 @@ public class IndexController extends BaseController{
     }
 
     @GetMapping("/admin")
-    public String admin(ModelMap model){
+    public String admin(ModelMap model) throws IOException {
         String phone = (String) SecurityUtils.getSubject().getPrincipal();
 
         if (phone != null && phone.equals("110120119")){
@@ -142,6 +145,7 @@ public class IndexController extends BaseController{
             Page<User> lastUsers = userService.findLastUsers(1, 100);
 
 
+            model.addAttribute("todayAccessNum",this.getTodayAccessNum());
             model.addAttribute("totalusernum",users.size());
             model.addAttribute("totalneednum",needs.size());
             model.addAttribute("lastusernum",lastUsers.getTotal());
@@ -157,6 +161,30 @@ public class IndexController extends BaseController{
 
 
         return "login";
+    }
+
+    public int getTodayAccessNum() throws IOException {
+        String today = dateFormat.format(new Date());
+
+        File file = new File("D:\\tomcat\\logs");
+        File[] files = file.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                System.out.println(name);
+                if (name.indexOf(today) != -1)
+                    return true;
+                return false;
+            }
+        });
+        FileReader fileReader = new FileReader(files[0].getAbsolutePath());
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        HashSet<String> strings = new HashSet<>();
+        String str;
+        while ((str = bufferedReader.readLine()) != null){
+            str = str.substring(0,str.indexOf(" "));
+            strings.add(str);
+        }
+        return strings.size();
     }
 
 }

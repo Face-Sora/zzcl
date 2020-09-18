@@ -12,3 +12,8 @@ mybatis-plus:
   mapper-locations: classpath*:/mapper/xinxi/**Mapper.xml
 server:
   port: 8888
+  tomcat:
+    accesslog:
+      directory: logs
+      enabled: true
+    basedir: D:\tomcat

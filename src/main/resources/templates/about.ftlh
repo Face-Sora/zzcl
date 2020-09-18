@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="">
-		<title>众智联云科技(山东)有限公司</title>
+		<title>众智创联云科技(山东)有限公司</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/hwslider.css" rel="stylesheet">
 		<link href="css/fonts.css" rel="stylesheet">
@@ -41,11 +41,11 @@
 					<div class="col-md-4"><img src="images/about1.jpg" /></div>
 					<div class="col-md-8">
 						<p class="ab-txt-right">
-							众智联云科技(山东)有限公司
+							众智创联云科技(山东)有限公司
 							<span>Zhongzhi Chuanglian Cloud Technology (Shandong) Limited Company</span>
 						</p>
 						<p class="ab-wen">
-							众智联云科技(山东)有限公司，成立于2020年06月，注册于淄博市张店区大学生创业园，
+							众智创联云科技(山东)有限公司，成立于2020年06月，注册于淄博市张店区大学生创业园，
 							是由多家科技型企业和工业制造型企业共同成立，公司主要有：信息化（淄博深科科技有限公司）、智能化（淄博三石智能科技有限公司）、
 							机器人（淄博众成机器人科技有限公司）、软件开发（山东金巨丰软件有限公司）等组成。
 						</p>
@@ -55,7 +55,7 @@
 							并在多个农膜生产厂中大规模实施。
 						</p>
 						<p class="ab-wen">
-							致力打造工业企业与现代自动化、信息化企业连接的桥梁——众智联互联网工业平台，
+							致力打造工业企业与现代自动化、信息化企业连接的桥梁——众智创联互联网工业平台，
 							是公司的主营业务，跟进现代科技，改进生产解决方案，使工业企业实现自动化生产。
 						</p>
 					</div>

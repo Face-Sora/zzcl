@@ -89,6 +89,7 @@
                             <th class="">申请者</th>
                             <th class="">申请者电话</th>
                             <th class="">申请时间</th>
+                            <th class="">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -101,6 +102,7 @@
                                 <td>${apply.applicant.nickName}</td>
                                 <td>${apply.applicant.phone}</td>
                                 <td>${apply.createTime?string("yyyy-MM-dd")}</td>
+                                <td><button type="button" class="btn btn-danger btn-xs"  id="rmApply" value="${apply.id}">删除</button></td>
                             </tr>
                         </#list>
 
@@ -208,6 +210,16 @@
             $(".textarea").wysihtml5({
                 locale: 'zh-CN'
             });
+
+            $("#rmApply").click(function () {
+                var applyId = $(this).attr("value");
+                if (window.confirm("确定要删除此条项目申请？"))
+                    $.post("/apply/delete",{applyId:applyId},function (result) {
+                        if (result == "success"){
+                            location.reload();
+                        }
+                    })
+            })
         });
 
 

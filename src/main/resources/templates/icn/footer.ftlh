@@ -21,8 +21,8 @@
                 </ul>
             </div>
             <div class="footera-sg">
-                <p class="footera-sgp">公司名称：众智联云科技（山东）有限公司&nbsp;&nbsp;&nbsp;联系电话：400 0256 757&nbsp;&nbsp;&nbsp;地址：山东省淄博市张店区马尚镇新村西路185号</p>
-                <p class="footera_p">众智联云科技（山东）有限公司 版权所有</p>
+                <p class="footera-sgp">公司名称：众智创联云科技（山东）有限公司&nbsp;&nbsp;&nbsp;联系电话：400 0256 757&nbsp;&nbsp;&nbsp;地址：山东省淄博市张店区马尚镇新村西路185号</p>
+                <p class="footera_p">众智创联云科技（山东）有限公司 版权所有</p>
             </div>
         </div>
     </section>

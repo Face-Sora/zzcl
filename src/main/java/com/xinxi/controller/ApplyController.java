@@ -59,14 +59,15 @@ public class ApplyController extends BaseController {
                 map.put("error","您已经申请过该项目，请勿重复申请!");
                 return map;
             }
-
+        }else{
+            map.put("error","notLogin");
         }
         return map;
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/cancel")
     @ResponseBody
-    public String delete(int needId){
+    public String cancel(int needId){
         String phone = (String) SecurityUtils.getSubject().getPrincipal();
         User user = iUserService.getOne(new QueryWrapper<User>().eq("phone", phone));
         Long id = user.getId();
@@ -75,6 +76,18 @@ public class ApplyController extends BaseController {
         map.put("need_id",needId);
         iApplyService.removeByMap(map);
         return "ok";
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public String delete(int applyId){
+        QueryWrapper<Apply> applyQueryWrapper = new QueryWrapper<>();
+        applyQueryWrapper.eq("id",applyId);
+        boolean remove = iApplyService.remove(applyQueryWrapper);
+        if (remove)
+            return "success";
+        else
+            return "error";
     }
 
     @GetMapping("/applyList")
