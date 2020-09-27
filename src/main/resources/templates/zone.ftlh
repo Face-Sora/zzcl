@@ -150,7 +150,7 @@
 													                        <span class="input-group-addon" >
 																				<span class="glyphicon glyphicon-time " aria-hidden="true"></span>
 																			</span>
-													                        <input name="time" type="text" class="form-control"  placeholder="截止日期" aria-describedby="basic-addon1" value="${need.deadLine}">
+													                        <input name="time" type="date" class="form-control"  placeholder="截止日期" aria-describedby="basic-addon1" value="${need.deadLine}">
 
 													                    </div>
 																		<br />
@@ -158,7 +158,9 @@
 																			<span class="input-group-addon" >
 																				<span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
 																			</span>
-																			<input name="price" type="text" class="form-control"  placeholder="预算" aria-describedby="basic-addon1" value="${need.price}">
+																			<input name="price" type="number" class="form-control"  placeholder="预算" aria-describedby="basic-addon1" value="${need.price}">
+																			<span class="input-group-addon" >千</span>
+
 																		</div>
 																			<br />
 													                    <div class="modal-footer">
@@ -237,7 +239,33 @@
 										</tr>
 										<tr>
 											<td>${user.nickName}</td>
-											<td>${user.phone}</td>
+											<td>${user.phone}  <button type="button" class="btn bg-danger btn-xs" data-toggle="modal" data-target="#phoneMdf">更换</button>
+												<div class="modal" id="phoneMdf" tabindex="-1" role="dialog"
+													 aria-labelledby="mySmallModalLabel" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button id="clsbtn" type="button" class="close" data-dismiss="modal">
+																	<span aria-hidden="true">&times;</span>
+																	<span class="sr-only">Close</span>
+																</button>
+																<h4 class="modal-title">更换手机号</h4>
+															</div>
+															<div class="modal-body">
+																<div class="input-group">
+													                        <span class="input-group-addon" >
+																				<span class="glyphicon glyphicon-phone " aria-hidden="true"></span>
+																			</span>
+																	<input id="uphone" type="text" class="form-control"  placeholder="手机号" aria-describedby="basic-addon1" value="${user.phone}">
+
+																</div>
+																<div class="modal-footer">
+																	<button type="button" id="mdfPhone" value="${user.id?c}" class="btn btn-success">确认更换</button>
+																</div>
+															</div>
+														</div>
+													</div>
+											</td>
 											<td>${user.email}</td>
 											<td><button type="button" class="btn bg-warning btn-xs" data-toggle="modal" data-target="#userMdf">编辑</button>
 												<div class="modal" id="userMdf" tabindex="-1" role="dialog"
@@ -261,16 +289,8 @@
 																</div>
 																<br />
 																<div class="input-group">
-													                        <span class="input-group-addon" >
-																				<span class="glyphicon glyphicon-time " aria-hidden="true"></span>
-																			</span>
-																	<input id="uphone" type="text" class="form-control"  placeholder="手机号" aria-describedby="basic-addon1" value="${user.phone}">
-
-																</div>
-																<br />
-																<div class="input-group">
 																			<span class="input-group-addon" >
-																				<span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+																				<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 																			</span>
 																	<input id="uemail" type="email" class="form-control"  placeholder="邮箱" aria-describedby="basic-addon1" value="${user.email}">
 																</div>
@@ -301,7 +321,7 @@
 			<section class="footera">
 				<div class="footera-sg">
 					<p class="footera-sgp">众智创联云科技(山东)有限公司&nbsp;&nbsp;&nbsp;联系电话：400-0256 757&nbsp;&nbsp;&nbsp;地址：山东省淄博市张店区新村西路185号</p>
-					<p class="footera_p">Copyright &copy; 众智创联云科技(山东)有限公司 鲁ICP备14043160号-5&nbsp;&nbsp; 版权所有</p>
+					<p class="footera_p">Copyright &copy; 众智创联云科技(山东)有限公司&nbsp 版权所有</p>
 				</div>
 			</section>
 		</footer>
@@ -337,9 +357,28 @@
 				// });
 				$("#mdfUser").click(function(){
 					var id = $(this).attr("value");
-					$.post("/user/modify",{id:id,nickName:$("#uname").val(),phone:$("#uphone").val(),email:$("#uemail").val()},function (result) {
+					$.post("/user/modify",{id:id,nickName:$("#uname").val(),email:$("#uemail").val()},function (result) {
+							if (result != 'success'){
+								alert(result);
+								return;
+							}else{
+								alert('修改成功！');
+								location.reload();
+							}
+
+					})
+				})
+
+				$("#mdfPhone").click(function(){
+					var id = $(this).attr("value");
+					$.post("/user/modify",{id:id,phone:$("#uphone").val()},function (result) {
+						if (result != 'success'){
 							alert(result);
-							location.reload();
+							return;
+						}else{
+							location.href = "/tologin";
+						}
+
 					})
 				})
 
@@ -366,10 +405,11 @@
 					var sib = $(parent).siblings();
 					var title = $(sib).find("input[name='title']").val();
 					var time = $(sib).find("input[name='time']").val();
-					var price = $(sib).find("input[name='price']").val();
-					alert(title + time + price);
+					var price = $(sib).find("input[name='price']").val() / 10;
+					price = price + "万";
 
-					$.post("/need/modify",{id:needId,title:title,time:time,price:price},function () {
+
+					$.post("/need/modify",{id:needId,title:title,deadLine:time,price:price},function () {
 							alert("修改成功！");
 							location.reload();
 					})

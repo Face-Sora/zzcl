@@ -52,11 +52,11 @@
 									</#list>
 								</select>
 								<input class="con" type="text" id="title" placeholder="项目名：" />
-
+								<div id="center" class="cpl-sm-12">
 								<input class="min" type="text" id="adress" placeholder="项目地址：" />
-								<input class="min" type="text" id="price" placeholder="项目预算：" />
-								<input class="min" type="text" id="deadLine" placeholder="截止日期：" />
-								<br />
+								<input class="min" type="number" id="price" placeholder="项目预算：                千" />
+								<input class="min" type="date" id="deadLine" placeholder="截止日期：" />
+								</div>
 								<textarea type="text" placeholder="项目详细描述：" id="description" style="resize: none;"></textarea>
 
 								<div class="col-xs-3">
@@ -122,6 +122,9 @@
 			/*banner*/
 			$(function() {
 
+				$("#deadLine").css("height",$("#price").css("height"));
+
+
 				var check = "";
 				function checkNotEmpty(ids) {
 					$.each(ids, function (index, item) {
@@ -148,7 +151,7 @@
 				$("#submit").click(function () {
 					var type = $("#type").val();
 					var title = $("#title").val();
-					var price = $("#price").val();
+					var price = ($("#price").val())/10 + "万";
 					var time = $("#deadLine").val();
 					var des = $("#description").val();
 					var adress = $("#adress").val();

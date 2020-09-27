@@ -142,8 +142,8 @@
 </div>
 <script>
     $("#login").click(function () {
-        var phone = $("#phone").val();
-        var pwd = $("#pwd").val();
+        var phone = $("#phone").val().trim();
+        var pwd = $("#pwd").val().trim();
         $.ajax({
             type:"post",
             url:"/login",

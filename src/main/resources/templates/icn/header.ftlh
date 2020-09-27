@@ -11,7 +11,7 @@
             <button class="btn btn-link btn-xs right" type="button" data-toggle="modal" data-target="#register_modal">注册</button>
 
             <!-- 登录 -->
-            <button class="btn btn-link btn-xs" type="button" data-toggle="modal" data-target="#login_modal" style="float: right;">登录</button>
+            <button class="btn btn-link btn-xs right" type="button" data-toggle="modal" data-target="#login_modal" style="float: right;">登录</button>
             <#include "modal.ftlh">
         </div>
     </div>
@@ -33,22 +33,28 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a class="${(code == 1)?string('active','')}" href="/">首页</a>
+                            <a class="${(code == 1)?string('active','')}" href="/"><strong>首页</strong></a>
                         </li>
                         <li>
-                            <a class="${(code == 2)?string('active','')}" href="/about">关于我们</a>
+                            <a class="${(code == 2)?string('active','')}" href="/about"><strong>关于我们</strong></a>
                         </li>
                         <li>
-                            <a class="${(code == 3)?string('active','')}" href="/need/needList?pageNum=1&pageSize=5&classify=23">项目寻找</a>
+                            <a class="${(code == 3)?string('active','')}" href="/need/needList?pageNum=1&pageSize=5&classify=23"><strong>项目寻找</strong></a>
                         </li>
                         <li>
-                            <a class="${(code == 4)?string('active','')}" href="/need/toPublish?pageNum=1&pageSize=3">发布需求</a>
+                            <a class="${(code == 4)?string('active','')}" href="/need/toPublish?pageNum=1&pageSize=3"><strong>发布需求</strong></a>
                         </li>
                         <li>
-                            <a class="${(code == 6)?string('active','')}" href="/toShow">案例展示</a>
+                            <a class="${(code == 6)?string('active','')}" href="/toShow"><strong>案例展示</strong></a>
                         </li>
                         <li>
-                            <a class="${(code == 5)?string('active','')}" href="/towe">联系我们</a>
+                            <a class="${(code == 8)?string('active','')}" href="/toProductShow"><strong>产品展示</strong></a>
+                        </li>
+                        <li>
+                            <a class="${(code == 7)?string('active','')}" href="/toDiaoyan"><strong>市场调研</strong></a>
+                        </li>
+                        <li>
+                            <a class="${(code == 5)?string('active','')}" href="/towe"><strong>联系我们</strong></a>
                         </li>
                     </ul>
                 </div>
@@ -58,3 +64,4 @@
         </nav>
     </div>
 </header>
+

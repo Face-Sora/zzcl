@@ -9,6 +9,9 @@ import com.xinxi.service.*;
 import com.xinxi.service.impl.NeedTypeServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +48,25 @@ public class IndexController extends BaseController{
 
     @Autowired
     IApplyService iApplyService;
+
+    @Autowired
+    IQCompanyDefectService companyDefectService;
+
+    @Autowired
+    IQIntellectualPropertyService intellectualPropertyService;
+
+    @Autowired
+    IQLocansChannelService locansChannelService;
+
+    @Autowired
+    IQPolicyService policyService;
+
+    @Autowired
+    IQServiceDefectService serviceDefectService;
+
+    @Autowired
+    IQTrainService trainService;
+
 
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -86,6 +108,7 @@ public class IndexController extends BaseController{
         }catch (Exception e){
             return e.getMessage();
         }
+
         return "success";
     }
 
@@ -102,29 +125,39 @@ public class IndexController extends BaseController{
         return "show";
     }
 
+    @GetMapping("/toDiaoyan")
+    public String diaoyan(ModelMap model){
+        model.addAttribute("code", 7);
+        model.addAttribute("companyDefects",companyDefectService.list());
+        model.addAttribute("intellectualPropertys",intellectualPropertyService.list());
+        model.addAttribute("locansChannels",locansChannelService.list());
+        model.addAttribute("policys",policyService.list());
+        model.addAttribute("serviceDefects",serviceDefectService.list());
+        model.addAttribute("trains",trainService.list());
+
+        return "diaoyan";
+    }
+
     @RequestMapping("/towe")
     public String toWe(Model model){
         model.addAttribute("code", 5);
         return "we";}
 
+    @RequestMapping("/toProductShow")
+    public String toProductSHow(Model model){
+        model.addAttribute("code", 8);
+        return "product";}
+
+    @RequiresRoles("admin")
     @GetMapping("/toAdmin")
     public String toAdmin(){
-        String phone = (String) SecurityUtils.getSubject().getPrincipal();
-        log.info("phone = ",phone);
-        log.warn(phone);
-        if (phone != null && phone.equals("110120119")){
-            return "all-admin-index";}
-        else {
-            return "login";
-        }
+
+        return "all-admin-index";
     }
 
+    @RequiresRoles("admin")
     @GetMapping("/admin")
     public String admin(ModelMap model) throws IOException {
-        String phone = (String) SecurityUtils.getSubject().getPrincipal();
-
-        if (phone != null && phone.equals("110120119")){
-
             QueryWrapper<Need> nqw = new QueryWrapper<>();
             List<Need> needs = needService.list();
             nqw.eq("status",'n');
@@ -157,10 +190,6 @@ public class IndexController extends BaseController{
             model.addAttribute("leaveMessagesSize",iLeaveMessageService.list().size());
             model.addAttribute("applynum",iApplyService.count());
             return "admin";
-        }
-
-
-        return "login";
     }
 
     public int getTodayAccessNum() throws IOException {

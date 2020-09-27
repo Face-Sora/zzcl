@@ -12,6 +12,7 @@ import com.xinxi.service.INeedService;
 import com.xinxi.service.IUserService;
 import com.xinxi.service.impl.NeedServiceImpl;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -90,6 +91,7 @@ public class UserController extends BaseController {
         }
     }
 
+    @RequiresRoles("admin")
     @GetMapping("/lastUsers")
     public String lastUsers(int pageNum,int pageSize,ModelMap modelMap){
         Page<User> lastUsers = userService.findLastUsers(pageNum, pageSize);
@@ -118,6 +120,7 @@ public class UserController extends BaseController {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("phone",phone);
         User one = userService.getOne(queryWrapper);
+        log.warn("id === ",one.getId());
         List<Need> needs = needService.findByUserId(one.getId());
         model.addAttribute("needs",needs);
 
@@ -148,6 +151,7 @@ public class UserController extends BaseController {
         }
     }
 
+    @RequiresRoles("admin")
     @GetMapping("/allUsers")
     public String getAll(ModelMap model,int pageNum,int pageSize){
         Page<User> users = userService.page(new Page<User>(pageNum, pageSize));
@@ -156,6 +160,7 @@ public class UserController extends BaseController {
         return "allUsers";
     }
 
+    @RequiresRoles("admin")
     @GetMapping("/leaveMessages")
     public String getLeaveMessages(ModelMap model,int pageNum,int pageSize){
         Page<LeaveMessage> messages = iLeaveMessageService.page(new Page<LeaveMessage>(pageNum, pageSize));
@@ -181,8 +186,16 @@ public class UserController extends BaseController {
     @PostMapping("/modify")
     @ResponseBody
     public String modifyUser(User user){
-        userService.updateById(user);
-        return "修改成功";
+        String phone = user.getPhone();
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone",phone);
+        List<User> users = userService.list(queryWrapper);
+        if (users.size() > 0){
+            return "该手机号已被注册！";
+        }else{
+            userService.updateById(user);
+            return "success";
+        }
     }
 
 }

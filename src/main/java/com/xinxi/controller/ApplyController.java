@@ -8,6 +8,7 @@ import com.xinxi.entity.User;
 import com.xinxi.service.IApplyService;
 import com.xinxi.service.IUserService;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,6 +28,7 @@ import java.util.Map;
  * @author jobob
  * @since 2020-09-11
  */
+@RequiresRoles("admin")
 @Controller
 @RequestMapping("/apply")
 public class ApplyController extends BaseController {

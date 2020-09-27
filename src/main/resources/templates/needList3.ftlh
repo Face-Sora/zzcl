@@ -32,7 +32,7 @@
 			<div class="container">
 				<div class="pic-tit">
 					<div class="ab-tit">
-						<h2><em>检测</em><em class="f-normal">|</em><em>自动化</em></h2>
+						<h2><em>项目</em><em class="f-normal">|</em><em>寻找</em></h2>
 						<p class="s-font">ENTERPRISE PROFILE</p>
 					</div>
 					<div class="v-line"></div>
@@ -42,7 +42,7 @@
 					<ul>
 						<#list needTypes as needType>
 							<li class="${(needType.id == activeCode)?string("active","")}" >
-								<a href="/need/needList?pageNum=1&pageSize=1&classify=${needType.id}">${needType.name}</a>
+								<a href="/need/needList?pageNum=1&pageSize=5&classify=${needType.id}">${needType.name}</a>
 							</li>
 						</#list>
 					</ul>

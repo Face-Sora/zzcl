@@ -10,6 +10,7 @@ import com.xinxi.service.INeedService;
 import com.xinxi.service.INeedTypeService;
 import com.xinxi.service.IUserService;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +51,7 @@ public class NeedController extends BaseController {
         return "projectType";
     }
 
+    @RequiresRoles("admin")
     @GetMapping("/nNeeds")
     public String nNeeds(int pageNum,int pageSize,ModelMap model){
         Page<Need> nNeeds = iNeedService.findNNeeds(pageNum, pageSize);
@@ -58,6 +60,7 @@ public class NeedController extends BaseController {
         return "n-needs";
     }
 
+    @RequiresRoles("admin")
     @GetMapping("/yNeeds")
     public String yNeeds(int pageNum,int pageSize,ModelMap model){
         Page<Need> yNeeds = iNeedService.findYNeeds(pageNum, pageSize);

@@ -1,5 +1,6 @@
 package com.xinxi.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.xinxi.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,16 +25,12 @@ public class Store extends BaseEntity {
     private String name;
 
     /**
-     * 店铺地址
+     * 统一代码
      */
-    private String address;
-
-    /**
-     * 接单次数
-     */
-    private Integer time;
+    private String unicode;
 
     //店铺拥有者
+    @TableField(exist = false)
     private User user;
 
 }

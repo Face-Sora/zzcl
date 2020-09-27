@@ -69,7 +69,7 @@
 							<input class="con" name="email" type="text" placeholder="邮箱：" />
 							<input class="con" name="company" type="text" placeholder="公司：" />
 							<textarea type="text" name="message" placeholder="留言："></textarea>
-							<input style="margin-bottom: 5px;" class="submit" type="submit" value="提交" onclick="thank()"/>
+							<input style="margin-bottom: 5px;margin-left: 430px" class="submit" type="submit" value="提交" onclick="thank()"/>
 						</form>
 					</div>
 				</div>
