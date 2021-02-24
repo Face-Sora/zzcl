@@ -28,7 +28,7 @@ import java.util.Map;
  * @author jobob
  * @since 2020-09-11
  */
-@RequiresRoles("admin")
+
 @Controller
 @RequestMapping("/apply")
 public class ApplyController extends BaseController {
@@ -64,6 +64,7 @@ public class ApplyController extends BaseController {
         }else{
             map.put("error","notLogin");
         }
+        System.out.println(map);
         return map;
     }
 

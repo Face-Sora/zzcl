@@ -1,6 +1,6 @@
 package com.xinxi.mapper;
 
-import com.xinxi.entity.QLocansChannel;
+import com.xinxi.entity.QFinancingChannel;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author jobob
  * @since 2020-09-22
  */
-public interface QLocansChannelMapper extends BaseMapper<QLocansChannel> {
+public interface QLocansChannelMapper extends BaseMapper<QFinancingChannel> {
 
 }

@@ -18,6 +18,8 @@ public interface INeedService extends IService<Need> {
 
     Page<Need> findByClassifyToPage(int pageNum,int pageSize,Long classify);
 
+    Page<Need> findByKeyWordToPage(int pageNum,int pageSize,String keyWord);
+
     List<Need> findByWorkerId(Long workerId);
 
     List<Need> findByUserId(Long userId);

@@ -26,6 +26,9 @@ public class User extends BaseEntity {
     //昵称
     private String nickName;
 
+    //公司
+    private String company;
+
     //手机
     private String phone;
 

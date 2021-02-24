@@ -6,12 +6,9 @@ import com.xinxi.entity.Need;
 import com.xinxi.entity.NeedType;
 import com.xinxi.entity.User;
 import com.xinxi.service.*;
-import com.xinxi.service.impl.NeedTypeServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -56,7 +50,7 @@ public class IndexController extends BaseController{
     IQIntellectualPropertyService intellectualPropertyService;
 
     @Autowired
-    IQLocansChannelService locansChannelService;
+    IQFinancingChannelService financingChannelService;
 
     @Autowired
     IQPolicyService policyService;
@@ -81,6 +75,12 @@ public class IndexController extends BaseController{
         model.addAttribute("phone",phone);
         model.addAttribute("pwd",pwd);
         return "login";
+    }
+
+    @GetMapping("/zhiku")
+    public String toZhiku(Model model){
+        model.addAttribute("code",9);
+        return "zhiku";
     }
 
     @GetMapping("/getCheckCode")
@@ -130,7 +130,7 @@ public class IndexController extends BaseController{
         model.addAttribute("code", 7);
         model.addAttribute("companyDefects",companyDefectService.list());
         model.addAttribute("intellectualPropertys",intellectualPropertyService.list());
-        model.addAttribute("locansChannels",locansChannelService.list());
+        model.addAttribute("financingChannels",financingChannelService.list());
         model.addAttribute("policys",policyService.list());
         model.addAttribute("serviceDefects",serviceDefectService.list());
         model.addAttribute("trains",trainService.list());
@@ -143,16 +143,18 @@ public class IndexController extends BaseController{
         model.addAttribute("code", 5);
         return "we";}
 
-    @RequestMapping("/toProductShow")
-    public String toProductSHow(Model model){
-        model.addAttribute("code", 8);
-        return "product";}
 
     @RequiresRoles("admin")
     @GetMapping("/toAdmin")
     public String toAdmin(){
 
         return "all-admin-index";
+    }
+
+    @GetMapping("/toDyAdmin")
+    public String toDyAdmin(){
+
+        return "dy-admin";
     }
 
     @RequiresRoles("admin")

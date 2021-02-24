@@ -21,7 +21,9 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import com.xinxi.controller.BaseController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.sql.Wrapper;
 import java.util.HashMap;
 import java.util.List;
@@ -56,16 +58,11 @@ public class UserController extends BaseController {
      */
     @PostMapping("/register")
     @ResponseBody
-    public String register(User user) {
+    public String register(User user, @RequestParam(value = "license",required = false)MultipartFile file) {
         System.out.println(user);
-        String s = DigestUtils.md5DigestAsHex(user.getPwd().getBytes());
-
-        user.setPwd(s);
-        String phone = user.getPhone();
-        String email = user.getEmail();
-        QueryWrapper<User> qw = new QueryWrapper<>();
-        qw.eq("phone",phone).or().eq("email",email);
-        List<User> users = userService.list(qw);
+        String pwd = DigestUtils.md5DigestAsHex(user.getPwd().getBytes());
+        user.setPwd(pwd);
+        List<User> users = userService.list(new QueryWrapper<User>().eq("phone",user.getPhone()).or().eq("email",user.getEmail()));
 
         if (users.size() > 0){
             return "该手机号或邮箱已被注册，请重新选择！";
@@ -73,6 +70,20 @@ public class UserController extends BaseController {
             user.setDelCode(1);
             userService.save(user);
         }
+        if (file != null){
+            String filePath = "C:\\licenses\\";
+            String fileName = user.getPhone() + ".jpg";
+            File file1 = new File(filePath + fileName);
+            if (!file1.getParentFile().exists())
+                file1.getParentFile().mkdirs();
+            try {
+                file.transferTo(file1);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+
         return "success";
     }
 

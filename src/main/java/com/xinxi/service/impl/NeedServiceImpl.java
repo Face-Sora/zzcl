@@ -230,4 +230,22 @@ public class NeedServiceImpl extends ServiceImpl<NeedMapper, Need> implements IN
         }
         return needs;
     }
+
+    @Override
+    public Page<Need> findByKeyWordToPage(int pageNum, int pageSize, String keyWord) {
+        Page<Need> page = new Page<>(pageNum, pageSize);
+        QueryWrapper<Need> needQueryWrapper = new QueryWrapper<>();
+        needQueryWrapper.like("title",keyWord);
+        needQueryWrapper.eq("status",'y');
+        Page<Need> needs = super.page(page, needQueryWrapper);
+
+        for (Need need:needs.getRecords()) {
+            Long userId = need.getUserId();
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id",userId);
+            User user = userService.getOne(queryWrapper);
+            need.setUser(user);
+        }
+        return needs;
+    }
 }

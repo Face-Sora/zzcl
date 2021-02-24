@@ -2,6 +2,9 @@ package com.xinxi.service;
 
 import com.xinxi.entity.QPolicy;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xinxi.entity.QQuestionPolicy;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IQPolicyService extends IService<QPolicy> {
 
+    List<String> findNames(List<QQuestionPolicy> qps);
 }

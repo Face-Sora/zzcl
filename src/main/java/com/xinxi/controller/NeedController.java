@@ -82,6 +82,13 @@ public class NeedController extends BaseController {
         model.addAttribute("needTypes",types);
 
         Page<Need> needs = iNeedService.listToPage(pageNum, pageSize);
+        for (Need need:needs.getRecords()) {
+            User user = need.getUser();
+            String phone = user.getPhone();
+            phone = phone.replace(phone.substring(3,7),"****");
+            user.setPhone(phone);
+            need.setUser(user);
+        }
         model.addAttribute("needs",needs);
 
         long pages = needs.getPages();
@@ -90,12 +97,17 @@ public class NeedController extends BaseController {
         return "publish";}
 
     @GetMapping("/needList")
-    public String toNeedList(ModelMap model,int pageNum, int pageSize, Long classify){
+    public String toNeedList(ModelMap model,int pageNum, int pageSize, @RequestParam(required = false) Long classify,
+                             @RequestParam(required = false) String keyWord){
 
         List<NeedType> types = iNeedTypeService.list();
         model.addAttribute("needTypes",types);
-
-        Page<Need> needs = iNeedService.findByClassifyToPage(pageNum, pageSize, classify);
+        Page<Need> needs;
+        if (keyWord == null){
+            needs = iNeedService.findByClassifyToPage(pageNum, pageSize, classify);
+        }else{
+            needs = iNeedService.findByKeyWordToPage(pageNum, pageSize, keyWord);
+        }
         for (Need need:needs.getRecords()) {
             User user = need.getUser();
             String phone = user.getPhone();
